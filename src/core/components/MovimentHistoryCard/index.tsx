@@ -3,7 +3,6 @@ import React from 'react';
 import {Container, Tag} from './styles';
 
 interface IMovimentHistoryCardProps {
-    cardColor: string;
     tagColor: string;
     title: string;
     subtitle: string;
@@ -11,7 +10,6 @@ interface IMovimentHistoryCardProps {
 }
 
 const MovimentHistoryCard: React.FC<IMovimentHistoryCardProps> = ({
-    cardColor, 
     tagColor, 
     title, 
     subtitle, 
@@ -19,7 +17,7 @@ const MovimentHistoryCard: React.FC<IMovimentHistoryCardProps> = ({
 }) => {
 
     return (
-        <Container color={cardColor}>
+        <Container>
             <Tag tagColor={tagColor}/>
             <div>
                 <span>{title}</span>
