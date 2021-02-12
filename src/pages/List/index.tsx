@@ -8,6 +8,8 @@ import {Container, Content, Filters} from './styles';
 
 import gains from '../../repositories/gains';
 import expenses from '../../repositories/expenses';
+import formatCurrency from '../../core/utils/formatCurrency';
+import formatDate from '../../core/utils/formatDate';
 
 interface IRouteParams {
     match: {
@@ -28,6 +30,8 @@ interface IData {
 
 const List: React.FC<IRouteParams> = ({ match }) => {
     const [data, setData] = useState<IData[]>([]);
+    const [monthSelected, setMonthSelected] = useState<string>('');
+    const [yearSelected, setYearSelected] = useState<string>('');
 
     const { type } = match.params;
 
@@ -50,9 +54,9 @@ const List: React.FC<IRouteParams> = ({ match }) => {
             return {
                 id: String(Math.random() * 100000),
                 decription: item.description,
-                amountFormatted: item.amount,
+                amountFormatted: formatCurrency(Number(item.amount)),
                 frequency: item.frequency,
-                dateFormatted: item.date,
+                dateFormatted: formatDate(item.date),
                 tagColor: item.frequency === 'recorrente' ? '#4e41f0' : "#e44c4e",
             }
         })
