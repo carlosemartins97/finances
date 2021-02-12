@@ -1,8 +1,13 @@
-import React, {useMemo} from 'react';
+import React, {useMemo, useState, useEffect} from 'react';
+
 import ContentHeader from '../../core/components/ContentHeader';
 import MovimentHistoryCard from '../../core/components/MovimentHistoryCard';
 import SelectInput from '../../core/components/SelectInput';
+
 import {Container, Content, Filters} from './styles';
+
+import gains from '../../repositories/gains';
+import expenses from '../../repositories/expenses';
 
 interface IRouteParams {
     match: {
@@ -12,8 +17,23 @@ interface IRouteParams {
     }
 }
 
+interface IData {
+    id: string;
+    decription: string;
+    amountFormatted: string;
+    frequency: string;
+    dateFormatted: string;
+    tagColor: string; 
+}
+
 const List: React.FC<IRouteParams> = ({ match }) => {
+    const [data, setData] = useState<IData[]>([]);
+
     const { type } = match.params;
+
+    const listData = useMemo(() => {
+        return type === 'inputs' ? gains : expenses;
+    },[type])
 
     const props = useMemo(() => {
         return type === 'inputs' ? {
@@ -24,6 +44,20 @@ const List: React.FC<IRouteParams> = ({ match }) => {
             lineColor: '#E44c4E'
         }
     },[type]);
+
+    useEffect(() => {
+        const response = listData.map(item => {
+            return {
+                id: String(Math.random() * 100000),
+                decription: item.description,
+                amountFormatted: item.amount,
+                frequency: item.frequency,
+                dateFormatted: item.date,
+                tagColor: item.frequency === 'recorrente' ? '#4e41f0' : "#e44c4e",
+            }
+        })
+        setData(response);
+    },[]);
 
     const months = [
         {value: 2, label: 'Fevereiro'},
@@ -58,12 +92,15 @@ const List: React.FC<IRouteParams> = ({ match }) => {
             </Filters>
 
             <Content>
-                <MovimentHistoryCard 
-                    tagColor="#E44c4E"
-                    title="Conta de Luz"
-                    subtitle="01/09/2021"
-                    amount="R$ 130,00"
+               { data.map(item => (
+               <MovimentHistoryCard 
+                    key={item.id}
+                    tagColor={item.tagColor}
+                    title={item.decription}
+                    subtitle={item.dateFormatted}
+                    amount={item.amountFormatted}
                 />
+                ))}
             </Content>
         </Container>
     )

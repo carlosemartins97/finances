@@ -16,6 +16,7 @@ export const Container = styled.li`
     cursor: pointer;
     transition: all .3s;
     position: relative;
+    border-radius: 10px;
 
     &:hover {
         opacity: .7;
@@ -27,6 +28,10 @@ export const Container = styled.li`
         flex-direction: column;
         justify-content: space-between;
         padding-left: 10px;
+    }
+    > div span {
+        font-weight: bold;
+        font-size: 22px;
     }
 `;
 
