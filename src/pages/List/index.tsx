@@ -1,10 +1,30 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import ContentHeader from '../../core/components/ContentHeader';
 import MovimentHistoryCard from '../../core/components/MovimentHistoryCard';
 import SelectInput from '../../core/components/SelectInput';
 import {Container, Content, Filters} from './styles';
 
-const List: React.FC = () => {
+interface IRouteParams {
+    match: {
+        params: {
+            type: string; //type => nome do parametro atribuido na rota.
+        }
+    }
+}
+
+const List: React.FC<IRouteParams> = ({ match }) => {
+    const { type } = match.params;
+
+    const props = useMemo(() => {
+        return type === 'inputs' ? {
+            title: 'Entradas',
+            lineColor: '#4E41F0'
+        } : {
+            title: 'Saídas',
+            lineColor: '#E44c4E'
+        }
+    },[type]);
+
     const months = [
         {value: 2, label: 'Fevereiro'},
         {value: 3, label: 'Março'},
@@ -17,7 +37,7 @@ const List: React.FC = () => {
     ]
     return (
         <Container>
-            <ContentHeader title="Saídas" lineColor='#E44C4E'>
+            <ContentHeader title={props.title} lineColor={props.lineColor}>
                 <SelectInput options={months}/>
                 <SelectInput options={years}/>
             </ContentHeader>

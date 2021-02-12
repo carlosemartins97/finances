@@ -14,15 +14,15 @@ const Aside: React.FC = () => {
             </Header>
 
             <MenuContainer>
-                <MenuItemLink href="#" >
+                <MenuItemLink href="/dashboard" >
                     <MdDashboard />
                     Dashboard
                 </MenuItemLink>
-                <MenuItemLink href="#" >
+                <MenuItemLink href="/list/inputs" >
                     <MdArrowUpward />
                     Entradas
                 </MenuItemLink>
-                <MenuItemLink href="#" >
+                <MenuItemLink href="/list/outputs" >
                     <MdArrowDownward />
                     Saídas
                 </MenuItemLink>
