@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+
 import ContentHeader from '../../core/components/ContentHeader';
 import SelectInput from '../../core/components/SelectInput';
 
@@ -6,7 +7,8 @@ import listOfMonths from '../../core/utils/months';
 import gains from '../../repositories/gains';
 import expenses from '../../repositories/expenses';
 
-import { Container } from './styles';
+import { Container, Content } from './styles';
+import WalletCard from '../../core/components/WalletCard';
 
 const Dashboard: React.FC = () => {
     const [monthSelected, setMonthSelected] = useState<number>(new Date().getMonth() + 1);
@@ -66,6 +68,30 @@ const Dashboard: React.FC = () => {
                 <SelectInput options={months} onChange={(e) => handleMonthSelected(e.target.value)} defaultValue={monthSelected}/>
                 <SelectInput options={years} onChange={(e) => handleYearSelected(e.target.value)} defaultValue={yearSelected} />
             </ContentHeader>
+
+            <Content>
+                <WalletCard 
+                    title='Saldo'
+                    amount={150}
+                    footerLabel='Atualizado há 3 minutos'
+                    icon='dollar'
+                    color='#4e41f0'
+                />
+                <WalletCard 
+                    title='Entradas'
+                    amount={5000}
+                    footerLabel='Atualizado há 3 minutos'
+                    icon='arrowUp'
+                    color='#f7931b'
+                />
+                <WalletCard 
+                    title='Saídas'
+                    amount={4850}
+                    footerLabel='Atualizado há 3 minutos'
+                    icon='arrowDown'
+                    color='#E44c4E'
+                />
+            </Content>
         </Container>
     )
 }
