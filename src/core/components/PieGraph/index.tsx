@@ -36,7 +36,7 @@ const PieGraph: React.FC<IPieGraphProps> = ({ data }) =>  (
                             color={indicator.color}
                             key={indicator.name}
                         >
-                            <div>{indicator.percent}</div>
+                            <div>{indicator.percent}%</div>
                             <span>{indicator.name}</span>
                         </Legend>
                     ))
