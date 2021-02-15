@@ -16,6 +16,7 @@ import sweatingImg from '../../core/assets/sweating.svg';
 
 
 import { Container, Content } from './styles';
+import PieGraph from '../../core/components/PieGraph';
 
 const Dashboard: React.FC = () => {
     const [monthSelected, setMonthSelected] = useState<number>(new Date().getMonth() + 1);
@@ -87,6 +88,7 @@ const Dashboard: React.FC = () => {
         return total;
     },[monthSelected, yearSelected]);
 
+
     const message = useMemo(() => {
         if((totalGains - totalExpense) < 0){
             return {
@@ -110,7 +112,30 @@ const Dashboard: React.FC = () => {
                 icon: happyImg,
             }  
         }
-    },[totalExpense, totalGains])
+    },[totalExpense, totalGains]);
+
+    const relationExpensesVersusGains = useMemo(() => {
+        const total = totalGains + totalExpense;
+        const percentGains = (totalGains/total) * 100;
+        const percentExpenses = (totalExpense/total) * 100;
+
+        const data = [
+            {
+                name: 'Entradas',
+                value: totalGains,
+                percent: Number(percentGains.toFixed(1)),
+                color: '#f7931b'
+            },
+            {
+                name: 'Saídas',
+                value: totalExpense,
+                percent: Number(percentExpenses.toFixed(1)),
+                color: '#E44c4E'
+            }
+        ];
+        return data;
+
+    },[totalGains, totalExpense]);
 
 
     const handleMonthSelected = (month: string) => {
@@ -167,6 +192,10 @@ const Dashboard: React.FC = () => {
                     description={message.description}
                     footerText={message.footerText}
                     icon={message.icon}
+                />
+
+                <PieGraph 
+                    data={relationExpensesVersusGains}
                 />
             </Content>
         </Container>
