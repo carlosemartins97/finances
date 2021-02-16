@@ -10,6 +10,16 @@ export const Container = styled.div`
     align-items: center;
 
     background-color: ${props => props.theme.colors.primary};
+
+    animation: fadein .3s;
+    @keyframes fadein {
+        from {
+            opacity: .5;
+        }
+        to {
+            opacity: 1;
+        }
+    }
 `;
 
 export const Logo = styled.div`
