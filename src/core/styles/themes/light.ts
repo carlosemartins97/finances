@@ -6,8 +6,8 @@ export const light = {
         secondary: '#FFFFFF',
         tertiary: '#F5F5F5',
 
-        white: '#FFF',
-        black:'#000',
+        white: '#000',
+        black:'#fff',
         gray: '#BFBFBF',
 
         success: '#03BB85',
