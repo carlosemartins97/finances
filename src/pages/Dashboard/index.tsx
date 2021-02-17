@@ -316,14 +316,14 @@ const Dashboard: React.FC = () => {
                 <WalletCard 
                     title='Entradas'
                     amount={totalGains}
-                    footerLabel='Atualizado há 3 minutos'
+                    footerLabel='Atualizado com base nas entradas e saídas'
                     icon='arrowUp'
                     color='#f7931b'
                 />
                 <WalletCard 
                     title='Saídas'
                     amount={totalExpense}
-                    footerLabel='Atualizado há 3 minutos'
+                    footerLabel='Atualizado com base nas entradas e saídas'
                     icon='arrowDown'
                     color='#E44c4E'
                 />

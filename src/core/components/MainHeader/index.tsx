@@ -1,6 +1,6 @@
 import React, {useMemo, useState} from 'react';
-
 import Toggle from '../Toggle'
+
 import emojis from '../../utils/emojis'
 
 import { useTheme } from '../../hooks/theme'

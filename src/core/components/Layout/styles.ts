@@ -14,6 +14,7 @@ export const Grid = styled.div`
     @media(max-width: 600px){
         grid-template-columns: 100%;
         grid-template-rows: 70px auto;
+        min-width: 315px;
 
         grid-template-areas:
         'MH'
