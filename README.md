@@ -1,46 +1,72 @@
-# Getting Started with Create React App
+# My Wallet Dashboard
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Sobre o projeto
 
-## Available Scripts
+O Projeto "My Wallet Dashboard" foi desenvolvido para por em práticas os fundamentos do ReactJs utilizando principalmente Typescript, Styled Components e boas práticas.
 
-In the project directory, you can run:
+A Aplicação consiste em uma dashboard intuitiva para controle de economias, onde o usuário é capaz de analisar o histórico de gastos e todos os dados de forma dinâmica de acordo com o mês e o ano selecionado, podendo também, alterar o visual para o estilo Dark ou Light.
 
-### `yarn start`
+<img src="https://i.imgur.com/GHC5NTG.gif" alt="Projeto My Wallet Dashboard">
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Mobile e Laptop
+<img src="https://i.imgur.com/P5aLcgD.png" alt="Projeto com tema light em todos os dispositivos">
+<img src="https://i.ibb.co/MhQBWYK/Screenshot-1.png" alt="Projeto com tema dark em todos os dispositivos">
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+O projeto atualmente se mantém apenas no FrontWeb, com conteúdos e dados estáticos, sem ter qualquer envolvimento com o banco de dados e um backend.
+Caso deseje adicionar novas linhas de conteúdo, veja abaixo:
 
-### `yarn test`
+## Dados
+Entre na pasta do projeto e digite o comando:
+```bash
+cd src/repositories
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Dentro dessa pasta existem 2 arquivos: 
+```bash
+"gains.ts","expenses.ts"
+```
+Edite conforme sua preferência mantendo o modelo abaixo:
+```bash
+{ 
+  "description": "Salário",
+  "amount": "1300.52",
+  "type": "entrada",
+  "frequency": "recorrente",
+  "date": "2020-01-10" 
+ }
+```
+description: 'Nome ou descrição' <br>
+amount: 'Valor' (string) <br>
+frequency: 'recorrente' || 'eventual' <br>
+type: 'entrada' || 'saida' <br>
+date: 'data referente à transação' (string) <br>
 
-### `yarn build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# Tecnologias utilizadas
+- HTML / CSS / JavaScript
+- ReactJS
+- Styled Components
+- Typescript
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Como executar o projeto
+Pré-requisitos: npm / yarn
 
-### `yarn eject`
+```bash
+# entrar na pasta do projeto
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+# instalar dependências
+npm / yarn install
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# executar o projeto
+npm start / yarn start
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+# Autor
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Carlos Eduardo S. Martins
+
+https://www.linkedin.com/in/carlosemartins97
