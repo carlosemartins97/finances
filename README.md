@@ -48,6 +48,8 @@ date: 'data referente à transação' (string) <br>
 - ReactJS
 - Styled Components
 - Typescript
+- Recharts -> Gráficos animados (lib)
+- CountUp -> Animação dos números na dashboard (lib)
 
 # Como executar o projeto
 Pré-requisitos: npm / yarn
