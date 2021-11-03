@@ -1,4 +1,4 @@
-import React, {useMemo, useState, useEffect, useCallback} from 'react';
+import React, {useMemo, useState, useEffect} from 'react';
 import { v4 as uuid_v4 } from "uuid";
 
 import ContentHeader from '../../core/components/ContentHeader';
@@ -10,9 +10,9 @@ import {Container, Content, Filters} from './styles';
 import formatCurrency from '../../core/utils/formatCurrency';
 import formatDate from '../../core/utils/formatDate';
 import listOfMonths from '../../core/utils/months';
-import { Metas } from '../Metas';
-import { Transactions } from '../Transactions';
+import { TransactionsProps } from '../Transactions';
 import { useLocation } from 'react-router-dom';
+import { MetasProps } from '../Metas';
 
 
 interface IRouteParams {
@@ -48,16 +48,16 @@ const List: React.FC<IRouteParams> = ({ match }) => {
     const activatedRoute = useLocation();
     const type = activatedRoute.pathname;
 
-    const listData: Transactions[] = useMemo(() => {
+    const listData: TransactionsProps[] = useMemo(() => {
         const getLocalData = localStorage.getItem('@saveMoney-transactions');
         
 
         if(type === '/list/inputs' || type === '/list/outputs') {
             if(getLocalData) {
-                const localData: Transactions[] = JSON.parse(getLocalData);
+                const localData: TransactionsProps[] = JSON.parse(getLocalData);
 
                 if(type === '/list/inputs') {
-                    const transactionsDataEntrada: Transactions[] = [];
+                    const transactionsDataEntrada: TransactionsProps[] = [];
                     localData.forEach(transaction => {
                         if(transaction.type === 'entrada') {
                             transactionsDataEntrada.push(transaction);
@@ -65,7 +65,7 @@ const List: React.FC<IRouteParams> = ({ match }) => {
                     })
                     return transactionsDataEntrada;
                 } else if(type ==='/list/outputs') {
-                    const transactionsDataSaida: Transactions[] = [];
+                    const transactionsDataSaida: TransactionsProps[] = [];
 
                     localData.forEach(transaction => {
                         if(transaction.type === 'saida') {
@@ -84,7 +84,7 @@ const List: React.FC<IRouteParams> = ({ match }) => {
 
         if(type === '/metas/list') {
             if(getMetasData) {
-                const metasData: Metas[] = JSON.parse(getMetasData);
+                const metasData: MetasProps[] = JSON.parse(getMetasData);
                 return metasData;
             }
         }
@@ -260,7 +260,7 @@ const List: React.FC<IRouteParams> = ({ match }) => {
                 }
             });
         }
-    },[listData, listaDataMetas]);
+    },[listData, listaDataMetas, type]);
 
     return (
         <Container>

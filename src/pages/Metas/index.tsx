@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
-import { Transactions } from '../Transactions';
 import {Container, InputField, Row} from './styles';
 
-export interface Metas {
+export interface MetasProps {
   title: string;
   type: string;
   date: string;
@@ -17,14 +16,14 @@ export default function Metas() {
   const [amount, setAmount] = useState('');
   const [description, setDescription] = useState('');
 
-  function saveOnLocalStorage(arr: Metas[], payload: Metas) {
+  function saveOnLocalStorage(arr: MetasProps[], payload: MetasProps) {
     arr.push(payload);
 
     localStorage.setItem('@saveMoney-metas', JSON.stringify(arr));
   }
 
-  function createSaveOnLocalStorage(payload: Metas) {
-    let arr: Metas[] = [
+  function createSaveOnLocalStorage(payload: MetasProps) {
+    let arr: MetasProps[] = [
       payload
     ]
 
@@ -32,7 +31,7 @@ export default function Metas() {
   }
 
   function onSubmit() {
-    let payload: Metas = {
+    let payload: MetasProps = {
       title,
       type,
       date,
@@ -42,7 +41,7 @@ export default function Metas() {
 
     const localData = localStorage.getItem('@saveMoney-metas');
     if(localData) {
-      let newLocalData: Metas[] = JSON.parse(localData);
+      let newLocalData: MetasProps[] = JSON.parse(localData);
       
       saveOnLocalStorage(newLocalData, payload);
     } else {

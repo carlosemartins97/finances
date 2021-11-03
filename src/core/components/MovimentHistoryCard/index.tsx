@@ -51,7 +51,7 @@ function MovimentHistoryCard( {
                 }
                 {
                     hasButton && isButtonLink && (
-                        <a href="#">{buttonText}</a>
+                        <a href="https://www.google.com.br">{buttonText}</a>
                     )
                 }
             </Row>

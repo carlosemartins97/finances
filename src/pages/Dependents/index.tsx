@@ -1,11 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {Container, FormField, TextInfo} from './styles';
 
 export default function Dependents() {
 
   const [email, setEmail] = useState('');
-  const [email2, setEmail2] = useState('');
-  const [message, setMessage] = useState('');
 
   function onSubmitAssociar() {
     const payload = {
@@ -50,10 +48,10 @@ export default function Dependents() {
 
         <FormField>
           <label htmlFor="email2">E-mail:</label>
-          <input type="email" name="email2" id="email2" onChange={(e) => setEmail2(e.target.value)}/>
+          <input type="email" name="email2" id="email2" />
 
           <label className="txtMsg" htmlFor="msg">Escreva uma mensagem para anexar ao convite:</label>
-          <textarea name="msg" id="msg" onChange={(e) => setMessage(e.target.value)}></textarea>
+          <textarea name="msg" id="msg"></textarea>
 
           <button type="button" onClick={onSubmitEnviarConvite}>ENVIAR CONVITE</button>
         </FormField>

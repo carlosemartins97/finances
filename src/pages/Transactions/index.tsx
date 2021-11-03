@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
   ButtonRow,
   Container,
@@ -7,7 +7,7 @@ import {
   Row
 } from './styles';
 
-export interface Transactions {
+export interface TransactionsProps {
   title: string;
   type: string;
   date: string;
@@ -25,14 +25,14 @@ function Transactions() {
   const [value, setValue] = useState('');
   const [desc, setDesc] = useState('');
 
-  function saveOnLocalStorage(arr: Transactions[], payload: Transactions) {
+  function saveOnLocalStorage(arr: TransactionsProps[], payload: TransactionsProps) {
     arr.push(payload);
 
     localStorage.setItem('@saveMoney-transactions', JSON.stringify(arr));
   }
 
-  function createSaveOnLocalStorage(payload: Transactions) {
-    let arr: Transactions[] = [
+  function createSaveOnLocalStorage(payload: TransactionsProps) {
+    let arr: TransactionsProps[] = [
       payload
     ]
 
@@ -40,7 +40,7 @@ function Transactions() {
   }
 
   function onSubmit() {
-    let payload: Transactions = {
+    let payload: TransactionsProps = {
       title,
       type,
       date,
@@ -51,7 +51,7 @@ function Transactions() {
 
     const localData = localStorage.getItem('@saveMoney-transactions');
     if(localData) {
-      let newLocalData: Transactions[] = JSON.parse(localData);
+      let newLocalData: TransactionsProps[] = JSON.parse(localData);
       
       saveOnLocalStorage(newLocalData, payload);
     } else {
