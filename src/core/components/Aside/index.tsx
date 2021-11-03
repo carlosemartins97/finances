@@ -9,6 +9,7 @@ import {
     MdExitToApp,
     MdClose,
     MdMenu,
+    MdAccountBalanceWallet
 } from 'react-icons/md';
 
 import { 
@@ -21,11 +22,13 @@ import {
     MenuItemButton,
     ToggleMenu,
     ThemeToggleFooter,
+    MenuLinkChild,
 } from './styles';
 
 import {useAuth} from '../../hooks/auth'
 import {useTheme} from '../../hooks/theme'
 import Toggle from '../Toggle';
+import { useLocation } from 'react-router-dom';
 
 const Aside: React.FC = () => {
     const {signOut} = useAuth();
@@ -44,6 +47,9 @@ const Aside: React.FC = () => {
         toggleTheme();
     }
 
+    const {pathname} = useLocation();
+    
+
     return (
         <Container menuIsOpen={toggleMenuIsOpened}>
             <Header>
@@ -60,6 +66,11 @@ const Aside: React.FC = () => {
                     <MdDashboard />
                     Dashboard
                 </MenuItemLink>
+                <MenuItemLink href="/newTransaction" >
+                    <MdAccountBalanceWallet />
+                    Nova Transação
+                </MenuItemLink>
+                
                 <MenuItemLink href="/list/inputs" >
                     <MdArrowUpward />
                     Entradas
@@ -68,6 +79,34 @@ const Aside: React.FC = () => {
                     <MdArrowDownward />
                     Saídas
                 </MenuItemLink>
+                <MenuItemLink href="/metas" >
+                    <MdAccountBalanceWallet />
+                    Metas
+                </MenuItemLink>
+                {
+                    pathname.includes('metas') && (
+                        <MenuItemLink href="/metas/list" >
+                            <MenuLinkChild>
+                                Consultar metas
+                            </MenuLinkChild>
+                        </MenuItemLink>
+                    )
+                }
+                
+                <MenuItemLink href="/dependents" >
+                    <MdDashboard />
+                    Dependentes
+                </MenuItemLink>
+                {
+                    pathname.includes('dependents') && (
+                        <MenuItemLink href="/dependents/list" >
+                            <MenuLinkChild>
+                                Consultar dependentes
+                            </MenuLinkChild>
+                        </MenuItemLink>
+                    )
+                }
+
                 <MenuItemButton onClick={signOut} >
                     <MdExitToApp />
                     Sair

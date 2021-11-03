@@ -26,6 +26,9 @@ const gains = [
   { "description": "Salário",     "amount": "2500.18", "type": "entrada", "frequency": "recorrente", "date": "2020-10-10" }, 
   { "description": "Salário",     "amount": "2200.15", "type": "entrada", "frequency": "recorrente", "date": "2020-11-10" }, 
   { "description": "Salário",     "amount": "3000.25", "type": "entrada", "frequency": "recorrente", "date": "2020-12-10" }, 
+  { "description": "Salário",     "amount": "3000.25", "type": "entrada", "frequency": "recorrente", "date": "2021-12-10" }, 
+  { "description": "Salário",     "amount": "3000.25", "type": "entrada", "frequency": "recorrente", "date": "2021-12-12" }, 
+  { "description": "Salário",     "amount": "3000.25", "type": "entrada", "frequency": "recorrente", "date": "2021-10-12" }, 
 ]
 
   export default gains;

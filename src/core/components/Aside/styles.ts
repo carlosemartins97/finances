@@ -142,3 +142,10 @@ export const ThemeToggleFooter = styled.div<IThemeFooterProps>`
         display: ${props => props.menuIsOpen ? 'block' : 'none'};
     }
 `;
+
+export const MenuLinkChild = styled.div`
+    margin-top: -12px;
+    font-size: 12px;
+    line-height: 16px;
+    padding-left: 24px;
+`;

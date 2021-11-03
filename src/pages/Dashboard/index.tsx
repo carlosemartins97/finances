@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import ContentHeader from '../../core/components/ContentHeader';
 import SelectInput from '../../core/components/SelectInput';
@@ -20,11 +20,39 @@ import { Container, Content } from './styles';
 import PieGraph from '../../core/components/PieGraph';
 import HistoryBox from '../../core/components/HistoryBox';
 import BarChartBox from '../../core/components/BarChartBox';
+import { Metas } from '../Metas';
+import { Transactions } from '../Transactions';
 
 const Dashboard: React.FC = () => {
     const [monthSelected, setMonthSelected] = useState<number>(new Date().getMonth() + 1);
     const [yearSelected, setYearSelected] = useState<number>(new Date().getFullYear());
     
+    const [metas, setMetas] = useState([]);
+    const [transacts, setTransacts] = useState<Transactions[]>([]);
+    
+
+    function getMetas() {
+        const metasString = localStorage.getItem('@saveMoney-metas');
+        if(metasString) {
+            setMetas(JSON.parse(metasString));
+        } else {
+            setMetas([]);
+        }
+    }
+
+    function getTransactions() {
+        const transactionsString = localStorage.getItem('@saveMoney-transactions');
+        if(transactionsString) {
+            setTransacts(JSON.parse(transactionsString));
+        } else {
+            setTransacts([]);
+        }
+    }
+
+    useEffect(() => {
+        getMetas();
+        getTransactions();
+    }, [])
 
     const months = useMemo(() => {
         return listOfMonths.map((month, index) => {
@@ -39,7 +67,7 @@ const Dashboard: React.FC = () => {
     const years = useMemo(() => {
         let uniqueYears: number[] = [];
 
-        [...expenses, ...gains].forEach(item => {
+        [...metas, ...transacts].forEach(item => {
             const date = new Date(item.date);
             const year = date.getFullYear();
 
@@ -53,12 +81,18 @@ const Dashboard: React.FC = () => {
                 label: year,
             }
         });
-    },[]);
+    },[metas, transacts]);
 
 
     const totalExpense = useMemo(() => {
         let total: number = 0;
-        expenses.forEach(item => {
+        const allSaidas: any[] = [];
+        transacts.forEach(transaction => {
+            if(transaction.type === 'saida') {
+                allSaidas.push(transaction);
+            }
+        })
+        allSaidas.forEach(item => {
             const date = new Date(item.date);
             const year = date.getFullYear();
             const month = date.getMonth() + 1;
@@ -71,12 +105,18 @@ const Dashboard: React.FC = () => {
             }
         })
         return total;
-    },[monthSelected, yearSelected]);
+    },[monthSelected, yearSelected, transacts]);
 
 
     const totalGains = useMemo(() => {
         let total: number = 0;
-        gains.forEach(item => {
+        const allEntradas: any[] = [];
+        transacts.forEach(transaction => {
+            if(transaction.type === 'entrada') {
+                allEntradas.push(transaction);
+            }
+        })
+        allEntradas.forEach(item => {
             const date = new Date(item.date);
             const year = date.getFullYear();
             const month = date.getMonth() + 1;
@@ -89,7 +129,7 @@ const Dashboard: React.FC = () => {
             }
         })
         return total;
-    },[monthSelected, yearSelected]);
+    },[monthSelected, yearSelected, transacts]);
 
 
     const message = useMemo(() => {
@@ -200,7 +240,14 @@ const Dashboard: React.FC = () => {
         let amountRecurrent = 0;
         let amountEventual = 0;
 
-        expenses.filter((expense) => {
+        const allSaidas: any[] = [];
+        transacts.forEach(transaction => {
+            if(transaction.type === 'saida') {
+                allSaidas.push(transaction);
+            }
+        })
+
+        allSaidas.filter((expense) => {
             const date = new Date(expense.date);
             const year = date.getFullYear();
             const month = date.getMonth()+1;
@@ -233,14 +280,21 @@ const Dashboard: React.FC = () => {
             }
         ]
 
-    },[monthSelected, yearSelected])
+    },[monthSelected, yearSelected, transacts])
 
 
     const relationGainsRecurrentVersusEventual = useMemo(() => {
         let amountRecurrent = 0;
         let amountEventual = 0;
 
-        gains.filter((gain) => {
+        const allEntradas: any[] = [];
+        transacts.forEach(transaction => {
+            if(transaction.type === 'entrada') {
+                allEntradas.push(transaction);
+            }
+        })
+
+        allEntradas.filter((gain) => {
             const date = new Date(gain.date);
             const year = date.getFullYear();
             const month = date.getMonth()+1;
@@ -275,7 +329,7 @@ const Dashboard: React.FC = () => {
             }
         ]
 
-    },[monthSelected, yearSelected])
+    },[monthSelected, yearSelected, transacts])
 
 
     const handleMonthSelected = useCallback((month: string) => {
@@ -339,11 +393,11 @@ const Dashboard: React.FC = () => {
                     data={relationExpensesVersusGains}
                 />
 
-                <HistoryBox 
+                {/* <HistoryBox 
                     data={historyData}
                     lineColorInput="#f7931b"
                     lineColorOutput="#e44c4e"
-                />
+                /> */}
 
                 <BarChartBox 
                     data={relationGainsRecurrentVersusEventual}

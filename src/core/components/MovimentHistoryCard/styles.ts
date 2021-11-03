@@ -1,5 +1,8 @@
 import styled, { keyframes } from 'styled-components';
 
+interface ActivatedProps {
+    display: string;
+}
 
 interface ITagProps {
     tagColor: string;
@@ -19,6 +22,17 @@ const animate = keyframes`
     }
 `;
 
+const scrollDown = keyframes`
+    0% {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+`;
+
 export const Container = styled.li`
     background-color: ${props => props.theme.colors.tertiary};
     list-style: none;
@@ -34,10 +48,6 @@ export const Container = styled.li`
 
     animation: ${animate} .2s ease-in-out;
 
-    &:hover {
-        opacity: .7;
-        transform: translateX(10px);
-    }
 
     > div {
         display: flex;
@@ -57,4 +67,43 @@ export const Tag = styled.div<ITagProps>`
     background-color: ${props => props.tagColor};
     position: absolute;
     left: 0;
+`;
+
+export const Row = styled.div`
+    display: flex;
+    flex-direction: row !important;
+    align-items: center;
+
+    button, a {
+        text-decoration: none;
+        margin-left: 24px;
+        border: none;
+        background: none;
+        color: ${props => props.theme.colors.info};
+        font-size: 18px;
+        line-height: 24px;
+        padding-right: 8px;
+    }
+`;
+
+export const ActivatedRow = styled.div<ActivatedProps>`
+    animation: ${scrollDown} .2s ease-in-out;
+    display: ${props => props.display};
+    background: ${props => props.theme.colors.tertiary};
+    justify-content: space-between;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: -20px;
+    transition: all 0.3s;
+    position: static;
+    z-index: -1;
+
+    span {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    p {
+        margin-top: 2px;
+    }
 `;

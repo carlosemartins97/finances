@@ -3,8 +3,8 @@ const formatDate = (date: string): string => {
     const year = formattedDate.getFullYear();
     
     const day = formattedDate.getDate() > 9 ? 
-    formattedDate.getDate()
-    : `0${formattedDate.getDate()}`;
+    formattedDate.getDate() + 1 
+    : `0${formattedDate.getDate() + 1}`;
 
     const month = formattedDate.getMonth() + 1 > 9 ? 
     formattedDate.getMonth() +1
