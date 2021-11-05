@@ -21,8 +21,8 @@ import BarChartBox from '../../core/components/BarChartBox';
 import { TransactionsProps } from '../Transactions';
 
 const Dashboard: React.FC = () => {
-    const [monthSelected, setMonthSelected] = useState<number>(new Date().getMonth() + 1);
-    const [yearSelected, setYearSelected] = useState<number>(new Date().getFullYear());
+    const [monthSelected, setMonthSelected] = useState<number>(new Date().getUTCMonth() + 1);
+    const [yearSelected, setYearSelected] = useState<number>(new Date().getUTCFullYear());
     
     const [metas, setMetas] = useState([]);
     const [transacts, setTransacts] = useState<TransactionsProps[]>([]);
@@ -66,7 +66,7 @@ const Dashboard: React.FC = () => {
 
         [...metas, ...transacts].forEach(item => {
             const date = new Date(item.date);
-            const year = date.getFullYear();
+            const year = date.getUTCFullYear();
 
             if(!uniqueYears.includes(year)){
                 uniqueYears.push(year);
@@ -91,8 +91,8 @@ const Dashboard: React.FC = () => {
         })
         allSaidas.forEach(item => {
             const date = new Date(item.date);
-            const year = date.getFullYear();
-            const month = date.getMonth() + 1;
+            const year = date.getUTCFullYear();
+            const month = date.getUTCMonth() + 1;
             if(month === monthSelected && year === yearSelected){
                 try{
                     total += Number(item.amount);
@@ -115,8 +115,8 @@ const Dashboard: React.FC = () => {
         })
         allEntradas.forEach(item => {
             const date = new Date(item.date);
-            const year = date.getFullYear();
-            const month = date.getMonth() + 1;
+            const year = date.getUTCFullYear();
+            const month = date.getUTCMonth() + 1;
             if(month === monthSelected && year === yearSelected){
                 try{
                     total += Number(item.amount);
@@ -189,8 +189,8 @@ const Dashboard: React.FC = () => {
     //         let amountInput = 0;
     //         gains.forEach(gain => {
     //             const date = new Date(gain.date);
-    //             const gainMonth = date.getMonth();
-    //             const gainYear = date.getFullYear();
+    //             const gainMonth = date.getUTCMonth();
+    //             const gainYear = date.getUTCFullYear();
 
     //             if(gainMonth === month && gainYear === yearSelected){
     //                 try{
@@ -204,8 +204,8 @@ const Dashboard: React.FC = () => {
     //         let amountOutput = 0;
     //         expenses.forEach(expense => {
     //             const date = new Date(expense.date);
-    //             const expenseMonth = date.getMonth();
-    //             const expenseYear = date.getFullYear();
+    //             const expenseMonth = date.getUTCMonth();
+    //             const expenseYear = date.getUTCFullYear();
 
     //             if(expenseMonth === month && expenseYear === yearSelected){
     //                 try{
@@ -224,8 +224,8 @@ const Dashboard: React.FC = () => {
     //         }
     //     })
     //     .filter(item => {
-    //         const currentMonth = new Date().getMonth();
-    //         const currentYear = new Date().getFullYear();
+    //         const currentMonth = new Date().getUTCMonth();
+    //         const currentYear = new Date().getUTCFullYear();
             
     //         return (yearSelected === currentYear && item.monthNumber <= currentMonth) || (yearSelected < currentYear)
     //     });
@@ -246,8 +246,8 @@ const Dashboard: React.FC = () => {
 
         allSaidas.filter((expense) => {
             const date = new Date(expense.date);
-            const year = date.getFullYear();
-            const month = date.getMonth()+1;
+            const year = date.getUTCFullYear();
+            const month = date.getUTCMonth()+1;
 
             return month === monthSelected && year === yearSelected;
         }).forEach((expense) => {
@@ -293,8 +293,8 @@ const Dashboard: React.FC = () => {
 
         allEntradas.filter((gain) => {
             const date = new Date(gain.date);
-            const year = date.getFullYear();
-            const month = date.getMonth()+1;
+            const year = date.getUTCFullYear();
+            const month = date.getUTCMonth()+1;
 
             return month === monthSelected && year === yearSelected;
         }).forEach((gain) => {
