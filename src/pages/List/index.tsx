@@ -40,8 +40,8 @@ interface Dependents {
 const List: React.FC<IRouteParams> = ({ match }) => {
     const [data, setData] = useState<IData[]>([]);
     const [dataDependents, setDataDependents] = useState<Dependents[]>([]);
-    const [monthSelected, setMonthSelected] = useState<number>(new Date().getMonth() + 1);
-    const [yearSelected, setYearSelected] = useState<number>(new Date().getFullYear());
+    const [monthSelected, setMonthSelected] = useState<number>(new Date().getUTCMonth() + 1);
+    const [yearSelected, setYearSelected] = useState<number>(new Date().getUTCFullYear());
     const [selectedFrequency, setSelectedFrequency] = useState(['recorrente', 'eventual']);
     const [selectedMeta, setSelectedMeta] = useState(['atingido', 'maximo']);
 
@@ -170,8 +170,8 @@ const List: React.FC<IRouteParams> = ({ match }) => {
         if(type === '/list/inputs' || type === '/list/outputs') {
             const filteredDate = listData.filter(item => {
                 const date = new Date(item.date)
-                const month = date.getMonth() + 1;
-                const year = date.getFullYear();
+                const month = date.getUTCMonth() + 1;
+                const year = date.getUTCFullYear();
 
             
                 return month === monthSelected && year === yearSelected && selectedFrequency.includes(item.frequency);
@@ -190,8 +190,8 @@ const List: React.FC<IRouteParams> = ({ match }) => {
         } else if(type === '/metas/list') {
             const filteredDate = listaDataMetas.filter(item => {
                 const date = new Date(item.date)
-                const month = date.getMonth() + 1;
-                const year = date.getFullYear();
+                const month = date.getUTCMonth() + 1;
+                const year = date.getUTCFullYear();
 
             
                 console.log(item.type);
@@ -232,7 +232,7 @@ const List: React.FC<IRouteParams> = ({ match }) => {
         if(type === '/list/inputs' || type === '/list/outputs') {
             listData.forEach(item => {
                 const date = new Date(item.date);
-                const year = date.getFullYear();
+                const year = date.getUTCFullYear();
     
                 if(!uniqueYears.includes(year)){
                     uniqueYears.push(year);
@@ -247,7 +247,7 @@ const List: React.FC<IRouteParams> = ({ match }) => {
         } else {
             listaDataMetas.forEach(item => {
                 const date = new Date(item.date);
-                const year = date.getFullYear();
+                const year = date.getUTCFullYear();
     
                 if(!uniqueYears.includes(year)){
                     uniqueYears.push(year);
