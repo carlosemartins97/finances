@@ -41,7 +41,7 @@ const Register: React.FC = () => {
                 <h2>Minha Carteira</h2>
             </Logo>
             <Form onSubmit={() => handleSubmit()}>
-                <FormTitle>Entrar</FormTitle>
+                <FormTitle>Cadastrar</FormTitle>
 
                 <Input 
                     type='text'
