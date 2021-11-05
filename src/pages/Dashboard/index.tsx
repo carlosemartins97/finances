@@ -72,12 +72,19 @@ const Dashboard: React.FC = () => {
                 uniqueYears.push(year);
             }
         });
-        return uniqueYears.map(year => {
-            return {
-                value: year,
-                label: year,
-            }
-        });
+        if(uniqueYears.length === 0) {
+            return [{
+                value: new Date().getUTCFullYear(),
+                label: new Date().getUTCFullYear()
+            }]
+        } else {
+            return uniqueYears.map(year => {
+                return {
+                    value: year,
+                    label: year,
+                }
+            });
+        }
     },[metas, transacts]);
 
 
