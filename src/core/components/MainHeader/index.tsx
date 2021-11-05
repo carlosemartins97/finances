@@ -12,6 +12,14 @@ const MainHeader: React.FC = () => {
     const {toggleTheme, theme} = useTheme();
 
     const [darkTheme, setDarkTheme] = useState(() => theme.title === 'dark' ? true : false);
+    const [name, setName] = useState(() => {
+        const userData = localStorage.getItem('@saveMoney-conta');
+        if(userData) {
+            return JSON.parse(userData).name;
+        } else {
+            setName('');
+        }
+    });
 
     const handleChangeTheme = () => {
         setDarkTheme(!darkTheme);
@@ -36,7 +44,7 @@ const MainHeader: React.FC = () => {
                     Olá , {emoji}
                 </Welcome>
                 <Username>
-                    Carlos Martins
+                    {name}
                 </Username>
             </Profile>
         </Container>
