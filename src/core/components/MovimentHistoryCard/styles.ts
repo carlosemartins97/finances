@@ -58,6 +58,10 @@ export const Container = styled.li`
     > div span {
         font-weight: bold;
         font-size: 22px;
+
+        @media(max-width: 768px) {
+            font-size: 16px;
+        }
     }
 `;
 
@@ -74,6 +78,12 @@ export const Row = styled.div`
     flex-direction: row !important;
     align-items: center;
 
+    h3 {
+        @media(max-width: 768px) {
+            font-size: 16px;
+        }
+    }
+
     button, a {
         text-decoration: none;
         margin-left: 24px;
@@ -83,6 +93,11 @@ export const Row = styled.div`
         font-size: 18px;
         line-height: 24px;
         padding-right: 8px;
+
+        @media(max-width: 768px) {
+            font-size: 16px;
+        }
+
     }
 `;
 

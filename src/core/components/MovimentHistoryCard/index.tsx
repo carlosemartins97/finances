@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {Container, Tag, Row, ActivatedRow} from './styles';
 
@@ -26,6 +26,7 @@ function MovimentHistoryCard( {
     frequency
 } :IMovimentHistoryCardProps) {
     const [display, setDisplay] = useState('none');
+    const [windowSize, setWindowSize] = useState(() => window.innerWidth);
 
     function handleOpenDetails() {
         if(display === 'none') {
@@ -34,6 +35,13 @@ function MovimentHistoryCard( {
             setDisplay('none');
         }
     }
+
+    useEffect(() => {
+        document.addEventListener('resize', function() {
+            setWindowSize(window.innerWidth);
+        })
+    }, [windowSize]);
+
     return (
     <>
         <Container>
@@ -46,12 +54,12 @@ function MovimentHistoryCard( {
                 <h3>{amount}</h3>
                 {
                     hasButton && !isButtonLink &&  (
-                        <button type="button" onClick={handleOpenDetails}>{buttonText}</button>
+                        <button type="button" onClick={handleOpenDetails}>{windowSize > 768 ? buttonText : '>'}</button>
                     )
                 }
                 {
                     hasButton && isButtonLink && (
-                        <a href="https://www.google.com.br">{buttonText}</a>
+                        <a href="https://www.google.com.br">{windowSize > 768 ? buttonText : '>'}</a>
                     )
                 }
             </Row>
