@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled, {css} from 'styled-components';
 
 interface IContainerProps {
@@ -68,7 +69,7 @@ export const MenuContainer = styled.nav`
     
 `;
 
-export const MenuItemLink= styled.a`
+export const MenuItemLink= styled(Link)`
     color: ${props => props.theme.colors.info};
     text-decoration: none;
     transition: opacity .3s;

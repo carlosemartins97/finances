@@ -62,30 +62,30 @@ const Aside: React.FC = () => {
             </Header>
 
             <MenuContainer>
-                <MenuItemLink href="/" >
+                <MenuItemLink to="/" >
                     <MdDashboard />
                     Dashboard
                 </MenuItemLink>
-                <MenuItemLink href="/newTransaction" >
+                <MenuItemLink to="/newTransaction" >
                     <MdAccountBalanceWallet />
                     Nova Transação
                 </MenuItemLink>
                 
-                <MenuItemLink href="/list/inputs" >
+                <MenuItemLink to="/list/inputs" >
                     <MdArrowUpward />
                     Entradas
                 </MenuItemLink>
-                <MenuItemLink href="/list/outputs" >
+                <MenuItemLink to="/list/outputs" >
                     <MdArrowDownward />
                     Saídas
                 </MenuItemLink>
-                <MenuItemLink href="/metas" >
+                <MenuItemLink to="/metas" >
                     <MdAccountBalanceWallet />
                     Metas
                 </MenuItemLink>
                 {
                     pathname.includes('metas') && (
-                        <MenuItemLink href="/metas/list" >
+                        <MenuItemLink to="/metas/list" >
                             <MenuLinkChild>
                                 Consultar metas
                             </MenuLinkChild>
@@ -93,13 +93,13 @@ const Aside: React.FC = () => {
                     )
                 }
                 
-                <MenuItemLink href="/dependents" >
+                <MenuItemLink to="/dependents" >
                     <MdDashboard />
                     Dependentes
                 </MenuItemLink>
                 {
                     pathname.includes('dependents') && (
-                        <MenuItemLink href="/dependents/list" >
+                        <MenuItemLink to="/dependents/list" >
                             <MenuLinkChild>
                                 Consultar dependentes
                             </MenuLinkChild>
