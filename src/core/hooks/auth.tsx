@@ -16,12 +16,17 @@ const AuthProvider: React.FC = ({children}) => {
     });
 
     const signIn = (email:string, password:string) => {
-        if(email === 'test@test.com' && password === '123'){
-            localStorage.setItem('@minha-carteira:logged', 'true');
-            setLogged(true);
-        } else {
-            alert('Usuário ou senha inválidos');
+        const userData = localStorage.getItem('@saveMoney-conta');
+        if(userData) {
+            const userDataParsed = JSON.parse(userData);
+            if(email === userDataParsed.email && password === userDataParsed.password){
+                localStorage.setItem('@minha-carteira:logged', 'true');
+                setLogged(true);
+            } else {
+                alert('Usuário ou senha inválidos');
+            }
         }
+        
     }
 
     const signOut = () => {

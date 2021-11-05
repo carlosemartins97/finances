@@ -1,11 +1,10 @@
 import React, {useState} from 'react';
+import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 
 import logoImg from '../../core/assets/logo.svg'
 import Button from '../../core/components/Button';
 import Input from '../../core/components/Input';
-
-import {useAuth} from '../../core/hooks/auth'
 
 import {
     Container,
@@ -15,11 +14,25 @@ import {
 
 } from './styles';
 
-const SignIn: React.FC = () => {
+const Register: React.FC = () => {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
+    const [name, setName] = useState<string>('');
 
-    const {signIn} = useAuth();
+    const history = useHistory();
+
+    function handleSubmit() {
+      const payload = {
+        email,
+        password,
+        name
+      };
+
+      localStorage.setItem('@saveMoney-conta', JSON.stringify(payload));
+      alert('Conta criada com sucesso!');
+      
+      history.push('/');
+    } 
 
     return (
         <Container>
@@ -27,8 +40,15 @@ const SignIn: React.FC = () => {
                 <img src={logoImg} alt="Minha Carteira" />
                 <h2>Minha Carteira</h2>
             </Logo>
-            <Form onSubmit={() => signIn(email, password)}>
+            <Form onSubmit={() => handleSubmit()}>
                 <FormTitle>Entrar</FormTitle>
+
+                <Input 
+                    type='text'
+                    placeholder="Nome"
+                    required
+                    onChange={(e) => setName(e.target.value)}
+                />
 
                 <Input 
                     type='email'
@@ -45,16 +65,16 @@ const SignIn: React.FC = () => {
                 />
 
                 <Button type="submit">
-                    Acessar
+                    Cadastrar
                 </Button>
 
             </Form>
 
-            <Link to="/register" className="link">
-                criar minha conta
+            <Link to="/" className="link">
+                já tenho uma conta
             </Link>
         </Container>
     )
 }
 
-export default SignIn;
+export default Register;

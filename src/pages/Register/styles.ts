@@ -20,7 +20,6 @@ export const Container = styled.div`
             opacity: 1;
         }
     }
-
     .link {
         margin-top: 24px;
         text-decoration: none;
@@ -43,11 +42,12 @@ export const Logo = styled.div`
         width: 40px;
         height: 40px;
     }
+
 `;
 
 export const Form = styled.form`
     width: 300px;
-    height: 300px;
+    height: auto;
 
     padding: 30px;
     border-radius: 10px;
