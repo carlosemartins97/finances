@@ -4,6 +4,7 @@ import { v4 as uuid_v4 } from "uuid";
 import ContentHeader from '../../core/components/ContentHeader';
 import MovimentHistoryCard from '../../core/components/MovimentHistoryCard';
 import SelectInput from '../../core/components/SelectInput';
+import DataNotFound from '../../core/components/DataNotFound';
 
 import {Container, Content, Filters} from './styles';
 
@@ -179,7 +180,7 @@ const List: React.FC<IRouteParams> = ({ match }) => {
             const formattedData = filteredDate.map(item => {
                 return {
                     id: String(uuid_v4()),
-                    decription: item.description,
+                    decription: item.title,
                     amountFormatted: formatCurrency(Number(item.amount)),
                     frequency: item.frequency,
                     dateFormatted: formatDate(item.date),
@@ -201,7 +202,7 @@ const List: React.FC<IRouteParams> = ({ match }) => {
             const formattedDataMetas = filteredDate.map(item => {
                 return {
                     id: String(uuid_v4()),
-                    decription: item.description,
+                    decription: item.title,
                     amountFormatted: formatCurrency(Number(item.amount)),
                     dateFormatted: formatDate(item.date),
                     frequency: item.type,
@@ -238,12 +239,19 @@ const List: React.FC<IRouteParams> = ({ match }) => {
                     uniqueYears.push(year);
                 }
             });
-            return uniqueYears.map(year => {
-                return {
-                    value: year,
-                    label: year,
-                }
-            });
+            if(uniqueYears.length === 0) {
+                return [{
+                    value: new Date().getUTCFullYear(),
+                    label: new Date().getUTCFullYear()
+                }]
+            } else {
+                return uniqueYears.map(year => {
+                    return {
+                        value: year,
+                        label: year,
+                    }
+                });
+            }
         } else {
             listaDataMetas.forEach(item => {
                 const date = new Date(item.date);
@@ -253,12 +261,19 @@ const List: React.FC<IRouteParams> = ({ match }) => {
                     uniqueYears.push(year);
                 }
             });
-            return uniqueYears.map(year => {
-                return {
-                    value: year,
-                    label: year,
-                }
-            });
+            if(uniqueYears.length === 0) {
+                return [{
+                    value: new Date().getUTCFullYear(),
+                    label: new Date().getUTCFullYear()
+                }]
+            } else {
+                return uniqueYears.map(year => {
+                    return {
+                        value: year,
+                        label: year,
+                    }
+                });
+            }
         }
     },[listData, listaDataMetas, type]);
 
@@ -320,9 +335,9 @@ const List: React.FC<IRouteParams> = ({ match }) => {
 
             <Content>
                {
-                   (type === '/list/inputs' || type === '/list/outputs') ? (
+                   (type === '/list/inputs' || type === '/list/outputs') && (
 
-                     data.map(item => (
+                    data.length !== 0 ? data.map(item => (
                         <MovimentHistoryCard 
                              key={item.id}
                              tagColor={item.tagColor}
@@ -330,14 +345,15 @@ const List: React.FC<IRouteParams> = ({ match }) => {
                              subtitle={item.dateFormatted}
                              amount={item.amountFormatted}
                          />
-                         ))
-                   )  : null
+                        )) : 
+                        <DataNotFound />
+                   ) 
                }
 
                {
-                   (type === '/metas/list') ? (
+                   (type === '/metas/list') && (
 
-                     data.map(item => (
+                    data.length !== 0 ? data.map(item => (
                         <MovimentHistoryCard 
                             key={item.id}
                             tagColor={item.tagColor}
@@ -348,25 +364,25 @@ const List: React.FC<IRouteParams> = ({ match }) => {
                             buttonText="Detalhes >"
                             description={item.decription}
                             frequency={item.frequency}
-                         />
-                         ))
-                   )  : null
+                        />
+                    )) : <DataNotFound />
+                   )
                }
 
                {
                    (type === '/dependents/list') && (
-                       dataDependents.map(item => (
-                        <MovimentHistoryCard 
-                            key={item.email}
-                            tagColor='#F7931B'
-                            title={item.email}
-                            subtitle=''
-                            amount=''
-                            hasButton={true}
-                            isButtonLink={true}
-                            buttonText='Acessar conta >'
-                        />
-                       ))
+                        dataDependents.length !== 0 ? dataDependents.map(item => (
+                            <MovimentHistoryCard 
+                                key={item.email}
+                                tagColor='#F7931B'
+                                title={item.email}
+                                subtitle=''
+                                amount=''
+                                hasButton={true}
+                                isButtonLink={true}
+                                buttonText='Acessar conta >'
+                            />
+                        )) : <DataNotFound haveDate={false}/>
                    )
                }
 
