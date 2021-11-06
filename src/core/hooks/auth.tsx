@@ -1,5 +1,4 @@
 import React, {createContext, useState, useContext} from 'react';
-import { useHistory } from 'react-router';
 
 interface IAuthContext {
     logged: boolean;
