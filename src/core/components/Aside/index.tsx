@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import logoImg from '../../assets/logo.svg'
+import {useHistory} from 'react-router'
 
 import {
     MdDashboard, 
@@ -48,7 +49,12 @@ const Aside: React.FC = () => {
     }
 
     const {pathname} = useLocation();
+    const history = useHistory();
     
+    function handleSignOut() {
+        history.push('/');
+        signOut();
+    }
 
     return (
         <Container menuIsOpen={toggleMenuIsOpened}>
@@ -107,7 +113,7 @@ const Aside: React.FC = () => {
                     )
                 }
 
-                <MenuItemButton onClick={signOut} >
+                <MenuItemButton onClick={handleSignOut} >
                     <MdExitToApp />
                     Sair
                 </MenuItemButton>

@@ -1,4 +1,5 @@
 import React, {createContext, useState, useContext} from 'react';
+import { useHistory } from 'react-router';
 
 interface IAuthContext {
     logged: boolean;
@@ -9,6 +10,7 @@ interface IAuthContext {
 const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 
 const AuthProvider: React.FC = ({children}) => {
+
     const [logged, setLogged] = useState<boolean>(() => {
         const isLogged = localStorage.getItem('@minha-carteira:logged');
 
@@ -32,6 +34,7 @@ const AuthProvider: React.FC = ({children}) => {
     const signOut = () => {
         localStorage.removeItem('@minha-carteira:logged');
         setLogged(false);
+        
     }
 
     return (
