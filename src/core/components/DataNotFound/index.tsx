@@ -9,7 +9,7 @@ export default function DataNotFound({haveDate = true}: DataNotFoundProps) {
     <Container>
       <p>
         <strong>Ops!</strong> Não foi encontrado nenhum dado 
-        {haveDate && <span>para a data selecionada.</span>}
+        {haveDate && <span> para a data selecionada.</span>}
         {!haveDate && <span>!</span>}
       </p>
     </Container>
